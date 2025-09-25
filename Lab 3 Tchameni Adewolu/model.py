@@ -19,10 +19,53 @@ class Table:
 
 
 class Order:
-    pass
+
+    def __init__(self):
+
+        self.items = []
+
+
+    def add_item(self, menu_item):
+        item = OrderItem(menu_item)
+        self.items.append(item)
+
+    def unordered_items(self):
+        unordered = []
+        for item in self.items:
+            if item.ordered is False:
+                unordered.append(item)
+        return unordered
+
+    def place_new_orders(self):
+        unordered = self.unordered_items()
+        for item in unordered:
+            item.mark_as_ordered()
+
+
+
+
+
+    def remove_unordered_items(self):
+        unordered = self.unordered_items()
+        for item in unordered:
+            self.items.remove(item)
+
+    def total_cost(self):
+        pass
+
+
+
+
 
 class OrderItem:
-    pass
+    def __init__(self,menu_item):
+        self.ordered = False
+        self.menu_item = menu_item
+
+    def mark_as_ordered(self):
+        self.ordered = True
+
+
 
 
 class MenuItem:
@@ -30,15 +73,4 @@ class MenuItem:
         self.name = name
         self.price = price
 
-class Controller:
-    pass
-
-class RestaurantController:
-    pass
-
-class OrderController:
-    pass
-
-class TableController:
-    pass
 

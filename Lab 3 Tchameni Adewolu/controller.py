@@ -41,17 +41,42 @@ class RestaurantController(Controller):
 
 
 class TableController(Controller):
-    pass
+    def __init__(self, view, restaurant, table):
+        self.table = table
+        super().__init__(view, restaurant)
+
+    def create_ui(self):
+        self.view.create_table_ui(table=self.table)
+
 
 
 class OrderController(Controller):
     def __init__(self, view, restaurant, table, seat_number):
-        self.seat_number = seat_number
         self.table = table
         self.order = table.order
         super().__init__(view, restaurant)
 
-    super().create_ui()
+    def create_ui(self):
+        self.view.create_order_ui(order=self.order)
+
+    def add_item(self, menu_item):
+        self.order.add_item(menu_item)
+        self.create_ui()
+
+    def update_order(self):
+        self.order.place_new_orders()
+
+    def cancel(self):
+        self.order.remove_unordered_items()
+        tc = TableController(self.view, self.restaurant, self.table)
+        self.view.set_controller(tc)
+
+
+
+
+
+
+    #super().create_ui()
 
 
 
