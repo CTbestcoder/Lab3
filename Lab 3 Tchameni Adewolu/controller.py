@@ -33,10 +33,16 @@ class Controller:
 
 class RestaurantController(Controller):
 
+    def __init__(self, view, restaurant):
+        super().__init__(view, restaurant)
+
+
     def create_ui(self):
         self.view.create_restaurant_ui()
 
     def table_touched(self, table_number):
+
+        table = self.restaurant.tables[table_number]
         self.view.table_touched(table_number)
 
 
@@ -65,6 +71,8 @@ class OrderController(Controller):
 
     def update_order(self):
         self.order.place_new_orders()
+        tc = TableController(self.view, self.restaurant, self.table)
+        self.view.set_controller(tc)
 
     def cancel(self):
         self.order.remove_unordered_items()

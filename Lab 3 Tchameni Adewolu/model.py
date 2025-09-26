@@ -12,6 +12,11 @@ class Restaurant:
 class Table:
 
     def __init__(self, seats, location):
+
+        table = []
+
+
+
         self.n_seats = seats
         self.location = location
         # TODO: Uncomment next line
